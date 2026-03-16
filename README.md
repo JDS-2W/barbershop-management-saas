@@ -18,13 +18,7 @@ Aqui estão algumas imagens do sistema em ação:
 > ![Dashboard Administrativo<img width="1919" height="1079" alt="dashboard" src="https://github.com/user-attachments/assets/c04b5472-703c-4f7e-9bbb-35878d6b305c" />
 )
 
-### Painel de Agendamento (Visão do Cliente)
-> ![Painel de Agendamento](<img width="1909" height="1072" alt="RelatórioMensal" src="https://github.com/user-attachments/assets/ce95064d-9bf5-4dc2-9d9b-651a57d14f82" />
-)
 
-### Controle Financeiro (Fluxo de Caixa)
-> ![Controle Financeiro](<img width="1918" height="1079" alt="ControleDoCaixa" src="https://github.com/user-attachments/assets/3159af20-7779-426b-95d7-c31e5d7b9fb7" />
-)
 
 
 
