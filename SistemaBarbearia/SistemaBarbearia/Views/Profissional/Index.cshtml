@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SistemaBarbearia.Models.ProfissionalModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Barbeiros | Jadson Barber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --gold: #FACC15; --bg: #050505; --card: #141414; --border: rgba(255,255,255,0.08); }
+        body { background: var(--bg); font-family: 'Inter', sans-serif; color: #fff; margin: 0; padding: 20px; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .btn-voltar { background: var(--card); color: #fff; padding: 10px 20px; border-radius: 10px; text-decoration: none; border: 1px solid var(--border); font-weight: 600; }
+        
+        .box-adicionar { background: var(--card); padding: 20px; border-radius: 15px; border: 1px solid var(--border); margin-bottom: 30px; }
+        .input-dark { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: #fff; width: 100%; margin-bottom: 10px; box-sizing: border-box;}
+        .btn-add { background: var(--gold); color: #000; font-weight: 800; padding: 12px; border: none; border-radius: 8px; cursor: pointer; width: 100%; }
+
+        .lista-profissionais { display: grid; gap: 15px; }
+        .card-prof { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .prof-nome { font-size: 1.2rem; font-weight: 800; margin: 0 0 5px 0; }
+        .prof-status { font-size: 0.8rem; font-weight: 700; padding: 5px 10px; border-radius: 5px; display: inline-block; }
+        .status-on { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status-off { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        .btn-toggle { background: transparent; border: 1px solid var(--border); color: #fff; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s;}
+        .btn-toggle:hover { background: rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div class="header">
+            <h2 style="margin: 0;"><i class="fas fa-users-cog text-warning"></i> Equipe</h2>
+            <a href="/Admin/PainelPrincipal" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+
+        <div class="box-adicionar">
+            <h4 style="margin-top: 0; color: var(--gold);">+ Adicionar Novo Barbeiro</h4>
+            <form asp-action="Adicionar" method="post" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <input type="text" name="nome" class="input-dark" placeholder="Nome do Barbeiro" required>
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <input type="text" name="telefone" class="input-dark" placeholder="Telefone / WhatsApp">
+                </div>
+                <div style="width: 150px; min-width: 100%;">
+                    <button type="submit" class="btn-add">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="lista-profissionais">
+            @if(Model != null && Model.Any())
+            {
+                foreach(var prof in Model)
+                {
+                    <div class="card-prof">
+                        <div>
+                            <h3 class="prof-nome">@prof.Nome</h3>
+                            @if(prof.Ativo) {
+                                <span class="prof-status status-on"><i class="fas fa-check-circle"></i> Disponível</span>
+                            } else {
+                                <span class="prof-status status-off"><i class="fas fa-times-circle"></i> Indisponível</span>
+                            }
+                        </div>
+                        
+                        <form asp-action="AlternarStatus" method="post" style="margin: 0;">
+                            <input type="hidden" name="id" value="@prof.Id" />
+                            <button type="submit" class="btn-toggle">
+                                @if(prof.Ativo) {
+                                    <i class="fas fa-ban text-danger"></i> <span>Pausar Agenda</span>
+                                } else {
+                                    <i class="fas fa-play text-success"></i> <span>Liberar Agenda</span>
+                                }
+                            </button>
+                        </form>
+                    </div>
+                }
+            }
+            else
+            {
+                <p style="text-align: center; color: #666; padding: 40px;">Nenhum barbeiro cadastrado ainda.</p>
+            }
+        </div>
+    </div>
+
+</body>
+</html>

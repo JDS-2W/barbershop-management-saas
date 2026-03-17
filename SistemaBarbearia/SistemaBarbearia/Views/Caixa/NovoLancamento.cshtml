@@ -1,0 +1,60 @@
+﻿@model SistemaBarbearia.Models.LancamentoFinanceiroModel
+
+@{
+    ViewData["Title"] = "Novo Lançamento";
+}
+
+<div class="container mt-5">
+    <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+        <h3 class="mb-4 text-primary">➕ Novo Lançamento</h3>
+
+        <form asp-controller="Caixa" asp-action="NovoLancamento" method="post">
+            <input type="hidden" name="CaixaId" value="@ViewBag.CaixaId" />
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="fw-bold">Tipo</label>
+                    <select asp-for="Tipo" class="form-select" required>
+                        <option value="Entrada">Entrada (Ganho)</option>
+                        <option value="Saida">Saída (Despesa)</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="fw-bold">Categoria</label>
+                    <select asp-for="Categoria" class="form-select" required>
+                        <option value="Servico">Serviço (Corte, Barba)</option>
+                        <option value="Produto">Venda de Produto</option>
+                        <option value="Despesa">Despesa (Luz, Água, etc)</option>
+                        <option value="Sangria">Sangria (Retirada)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="fw-bold">Descrição (Opcional)</label>
+                <input asp-for="Descricao" class="form-control" placeholder="Ex: Venda de Pomada Matte" />
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label class="fw-bold">Valor (R$)</label>
+                    <input asp-for="Valor" type="number" step="0.01" class="form-control fs-5 text-success" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="fw-bold">Forma de Pagamento</label>
+                    <select asp-for="FormaPagamento" class="form-select" required>
+                        <option value="PIX">PIX</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartao Credito">Cartão de Crédito</option>
+                        <option value="Cartao Debito">Cartão de Débito</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary px-5">Salvar Lançamento</button>
+            </div>
+        </form>
+    </div>
+</div>

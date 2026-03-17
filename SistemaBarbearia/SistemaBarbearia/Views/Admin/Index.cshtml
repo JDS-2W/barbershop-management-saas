@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card bg-dark border-0 shadow-lg p-4" style="border-radius: 20px; border-top: 5px solid #FFD700;">
+                <h2 class="text-white fw-bold text-center mb-4">LOGIN <span style="color: #FFD700;">ADMIN</span></h2>
+
+                @if (TempData["Erro"] != null)
+                {
+                    <div class="alert alert-danger fw-bold small text-center">@TempData["Erro"]</div>
+                }
+
+                <form action="/Admin/Index" method="post">
+                    <div class="mb-4">
+                        <input type="password" name="senha" class="form-control form-control-lg bg-black text-white text-center border-secondary" placeholder="SENHA" required />
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold py-3" style="border-radius: 12px;">ACESSAR PAINEL</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

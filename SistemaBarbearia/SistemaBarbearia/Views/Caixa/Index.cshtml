@@ -1,0 +1,77 @@
+﻿@model SistemaBarbearia.Models.CaixaModel
+
+@{
+    ViewData["Title"] = "Gestão de Caixa";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-white">💰 Controle de Caixa</h2> @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success fw-bold">@TempData["Sucesso"]</div>
+    }
+    @if (TempData["Erro"] != null)
+    {
+        <div class="alert alert-danger fw-bold">@TempData["Erro"]</div>
+    }
+
+    @if (Model == null)
+    {
+        <div class="card shadow text-center p-5 bg-dark text-white border-secondary">
+            <h3 class="text-danger">O Caixa está Fechado</h3>
+            <p class="text-light">Abra o caixa para começar a registrar as vendas e comissões de hoje.</p>
+
+            <form asp-controller="Caixa" asp-action="Abrir" method="post" class="mt-4">
+                <div class="form-group mb-3 mx-auto" style="max-width: 300px;">
+                    <label class="fw-bold text-warning">Troco inicial na gaveta (R$)</label>
+                    <input type="number" step="0.01" name="saldoInicial" class="form-control text-center fs-4 bg-light text-dark" value="0.00" required />
+                </div>
+                <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm fw-bold" style="max-width: 300px;">
+                    🔓 Abrir Caixa do Dia
+                </button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow p-4 border-success bg-white text-dark">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-success fw-bold">✅ Caixa Aberto</h3>
+                <span class="badge bg-success fs-6">Aberto em: @Model.DataAbertura.ToString("dd/MM/yyyy HH:mm")</span>
+            </div>
+
+            <div class="row text-center mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 bg-light rounded border">
+                        <h5 class="text-muted fw-bold">Saldo Inicial (Troco)</h5>
+                        <h3 class="text-secondary">R$ @Model.SaldoInicial.ToString("F2")</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 bg-light rounded border">
+                        <h5 class="text-muted fw-bold">Entradas do Dia</h5>
+                        <h3 class="text-primary fw-bold">
+                            R$ @(ViewBag.EntradasDoDia != null ? ((decimal)ViewBag.EntradasDoDia).ToString("F2") : "0,00")
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 bg-success bg-opacity-10 rounded border border-success">
+                        <h5 class="text-success fw-bold">Saldo Atual na Gaveta</h5>
+                        <h3 class="text-success fw-bold">R$ @Model.SaldoFinal.ToString("F2")</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-3 align-items-center flex-wrap">
+                <a asp-controller="Caixa" asp-action="NovoLancamento" class="btn btn-primary fw-bold shadow-sm">➕ Novo Lançamento</a>
+                <button class="btn btn-warning text-dark fw-bold shadow-sm">✂️ Pagar Vale/Comissão</button>
+
+                <form asp-controller="Caixa" asp-action="Fechar" method="post" class="ms-auto">
+                    <button type="submit" class="btn btn-danger fw-bold shadow-sm" onclick="return confirm('Tem certeza que deseja fechar o caixa de hoje?');">
+                        🔒 Fechar Caixa
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
