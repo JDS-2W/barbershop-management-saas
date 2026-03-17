@@ -1,0 +1,55 @@
+﻿@model SistemaBarbearia.Models.UsuarioModel
+
+@{
+    Layout = "_LayoutDeslogado";
+    ViewData["Title"] = "Login";
+
+   
+    bool IsAdmin = Model != null && Model.IsAdmin;
+}
+
+<div class="container py-5 d-flex justify-content-center">
+    <div class="card p-4" style="max-width: 400px; background: #161616; border: 1px solid #333; border-radius: 20px;">
+
+        <div class="text-center mb-4">
+            @if (IsAdmin)
+            {
+                <i class="fas fa-user-shield fa-3x mb-2" style="color: #FACC15;"></i>
+                <h2 class="text-white font-weight-bold">PAINEL ADMIN</h2>
+                <p class="text-muted small">Área restrita de gerenciamento</p>
+            }
+            else
+            {
+                <i class="fas fa-calendar-check fa-3x mb-2" style="color: #FACC15;"></i>
+                <h2 class="text-white font-weight-bold">OLÁ, CLIENTE!</h2>
+                <p class="text-muted small">Acesse sua conta para agendar</p>
+            }
+        </div>
+
+        <form asp-controller="Login" asp-action="Entrar" method="post">
+            <div class="mb-3">
+                <label class="text-white small mb-1">@(IsAdmin ? "Usuário Admin" : "Seu WhatsApp")</label>
+                @*  *@
+                <input asp-for="Whatsapp" type="text" class="form-control border-secondary text-white"
+                       placeholder="@(IsAdmin ? "admin" : "81 99999-9999")" style="background: #000;" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="text-white small mb-1">Senha</label>
+                @*  *@
+                <input asp-for="Senha" type="password" class="form-control border-secondary text-white"
+                       placeholder="****" style="background: #000;" required />
+            </div>
+
+            <button type="submit" class="btn btn-warning w-100 fw-bold py-2 mb-3" style="background: #FACC15;">
+                @(IsAdmin ? "ACESSAR PAINEL" : "ENTRAR E AGENDAR")
+            </button>
+        </form>
+
+        <div class="text-center">
+            <a href="/Home/Index" class="text-secondary small text-decoration-none">
+                <i class="fas fa-arrow-left"></i> Voltar para o Início
+            </a>
+        </div>
+    </div>
+</div>

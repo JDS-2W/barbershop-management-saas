@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Reserva Confirmada | Jadson Barber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold: #FACC15;
+            --bg: #050505;
+            --card: rgba(20, 20, 20, 0.85);
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(5, 5, 5, 1)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .box-sucesso {
+            background: var(--card);
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .icone-check {
+            color: #10b981;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            margin-bottom: 35px;
+            line-height: 1.5;
+        }
+
+        .btn-home {
+            background: linear-gradient(90deg, #FACC15, #EAB308);
+            color: #000;
+            padding: 16px 20px;
+            border-radius: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(250, 204, 21, 0.2);
+        }
+
+            .btn-home:active {
+                transform: scale(0.96);
+            }
+    </style>
+</head>
+<body>
+
+    <div class="box-sucesso">
+        <i class="fas fa-check-circle icone-check"></i>
+        <h1>Reserva Confirmada!</h1>
+        <p>Seu horário foi agendado com sucesso e já está no nosso sistema. Te esperamos lá!</p>
+
+        <a href="/Agendamento/Listagem" class="btn-home">
+            <i class="fas fa-calendar-check"></i> Ver Minhas Reservas
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+﻿@model IEnumerable<SistemaBarbearia.Models.BloqueioModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Jadson Barber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-gold {
+            color: #FACC15;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-voltar {
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+            .btn-voltar:hover {
+                background: #fff;
+                color: #000;
+            }
+
+        .card-config {
+            background: rgba(22, 22, 22, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .title-gold {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+            .title-gold span {
+                color: #FACC15;
+            }
+
+        label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        input {
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+            input:focus {
+                border-color: #FACC15;
+            }
+
+        .btn-bloquear {
+            background: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+            .btn-bloquear:hover {
+                background: #a71d2a;
+                transform: translateY(-2px);
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            text-align: left;
+            font-size: 0.7rem;
+            color: #FACC15;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .text-muted {
+            color: #666;
+            font-style: italic;
+        }
+
+        .btn-desbloquear {
+            background: transparent;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+
+            .btn-desbloquear:hover {
+                background: #dc3545;
+                color: #fff;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-nav">
+            <div class="logo-gold">✂ Jadson Barber</div>
+            <a href="/Admin/PainelPrincipal" class="btn-voltar">VOLTAR</a>
+        </div>
+
+        <div class="card-config">
+            <h2 class="title-gold">CONFIGURAR <span>BLOQUEIOS</span></h2>
+
+            <form asp-action="BloquearData" method="post">
+                <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 15px; align-items: end;">
+                    <div>
+                        <label>Escolha o dia:</label>
+                        <input type="date" name="data" required />
+                    </div>
+                    <div>
+                        <label>Motivo (Exibido para o cliente):</label>
+                        <input type="text" name="motivo" placeholder="Motivo de saúde" />
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-bloquear">BLOQUEAR AGORA</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="card-config">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data Bloqueada</th>
+                        <th>Motivo / Aviso</th>
+                        <th style="text-align: center;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var bloqueio in Model)
+                        {
+                            <tr>
+                                <td>@bloqueio.Data.ToShortDateString()</td>
+                                <td>@bloqueio.Motivo</td>
+                                <td style="text-align: center;">
+                                    @*  *@
+                                    <form asp-controller="Admin" asp-action="RemoverBloqueio" method="post" onsubmit="return confirm('Deseja realmente desbloquear esta data?');">
+                                        <input type="hidden" name="id" value="@bloqueio.Id" />
+                                        <button type="submit" class="btn-desbloquear">Desbloquear</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 30px;" class="text-muted">Nenhum dia bloqueado no momento.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
