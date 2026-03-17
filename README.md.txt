@@ -15,12 +15,15 @@ Uma solução moderna e completa para a gestão de barbearias, desenvolvida com 
 Aqui estão algumas imagens do sistema em ação:
 
 ### Dashboard Administrativo
-> ![Dashboard Administrativo<img width="1919" height="1079" alt="dashboard" src="https://github.com/user-attachments/assets/c04b5472-703c-4f7e-9bbb-35878d6b305c" />
-)
+> ![Dashboard Administrativo](./screenshots/dashboard.png)
 
+### Painel de Agendamento (Visão do Cliente)
+> ![Painel de Agendamento](./screenshots/agendamento.png)
 
+### Controle Financeiro (Fluxo de Caixa)
+> ![Controle Financeiro](./screenshots/financeiro.png)
 
-
+*(Nota: Se você usou nomes diferentes para as imagens, atualize os links acima, substituindo `dashboard.png`, etc., pelos nomes reais.)*
 
 ## 🛠️ Tecnologias Utilizadas
 
