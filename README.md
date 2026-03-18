@@ -23,7 +23,7 @@ Aqui estão algumas imagens do sistema em ação:
 ### Controle Financeiro (Fluxo de Caixa)
 > ![Controle Financeiro](./screenshots/financeiro.png)
 
-*(Nota: Se você usou nomes diferentes para as imagens, atualize os links acima, substituindo `dashboard.png`, etc., pelos nomes reais.)*
+
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -53,6 +53,6 @@ Este projeto é construído sobre uma base tecnológica robusta e moderna:
 
 ## ✉️ Contato
 
-Desenvolvido por **Jadson Alves da Silva**. Você pode me encontrar em:
-
+* **Instagram:** [JDS_2W](https://www.instagram.com/jds_2w/)
+* **linkedin:** [Jadson Alves](www.linkedin.com/in/jadson-alves-246808260)
 * **GitHub:** [JDS-2W](https://github.com/JDS-2W)
